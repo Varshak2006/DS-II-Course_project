@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SRS - College Timetable Scheduling System</title>
+<style>
+body{font-family:Calibri,Arial,sans-serif;line-height:1.25;}
+h1,h2,h3{color:#2c3e50;}
+r{border:none;border-top:1px solid #ccc;}
+code,pre{font-family:Consolas,monospace;}
+.small{font-size:10.5pt;color:#333;}
+</style>
+</head>
+<body>
+<h1>Software Requirements Specification (SRS)</h1>
+<h2>College Timetable Scheduling System (CTSS)</h2>
+<p class="small"><b>Repository:</b> Varshak2006/DS-II-Course_project<br>
+<b>Version:</b> 1.0<br>
+<b>Date:</b> 2026-03-20<br>
+<b>Document Status:</b> Draft (derived from current implementation)</p>
+<hr>
+<h2>1. Introduction</h2>
+<h3>1.1 Purpose</h3>
+<p>This SRS defines the functional and non-functional requirements for the <b>College Timetable Scheduling System</b>, a browser-based tool that allows a user to enter subjects for a selected class/division, specify subject type (Theory/Lab), weekly frequency (for theory), assigned faculty, faculty available days, and generate and display a timetable while attempting to avoid faculty conflicts and adjacent duplicates.</p>
+<h3>1.2 Scope</h3>
+<p>The system is a <b>front-end only</b>, single-page web application (HTML/CSS/JavaScript) that runs locally in a web browser. It does <b>not</b> use a backend or database in the current version.</p>
+<ul>
+<li>Select one class from a pre-defined list (FE-A…SE-E)</li>
+<li>Add subjects for that class</li>
+<li>Generate a timetable for Monday–Friday, time slots 8–9, 9–10, 10–11, 11–12</li>
+<li>Allocate labs as two consecutive slots (if possible)</li>
+<li>Allocate theory sessions up to a specified weekly frequency (best-effort)</li>
+<li>Prevent a faculty from being scheduled in two places at the same day/slot (global faculty schedule)</li>
+<li>Display timetable as a color-coded table (Lab vs Theory)</li>
+</ul>
+<h3>1.3 Definitions, Acronyms, Abbreviations</h3>
+<ul>
+<li><b>SRS</b>: Software Requirements Specification</li>
+<li><b>CTSS</b>: College Timetable Scheduling System</li>
+<li><b>Slot</b>: A time interval (e.g., 8–9)</li>
+<li><b>Lab</b>: Practical session requiring 2 consecutive slots in this system</li>
+<li><b>Theory</b>: Lecture session requiring 1 slot per occurrence</li>
+<li><b>Division/Class</b>: A student group such as FE-A, SE-C, etc.</li>
+<li><b>Faculty Availability Days</b>: Days in which a faculty can be scheduled for that subject</li>
+</ul>
+<h3>1.4 References</h3>
+<ul>
+<li>Implementation files: <code>index.html</code>, <code>script.js</code>, <code>style.css</code>, <code>README.md</code></li>
+</ul>
+<h3>1.5 Overview</h3>
+<p>Section 2 describes the product overall. Section 3 lists detailed requirements including functional behavior and constraints derived from the implementation.</p>
+<hr>
+<h2>2. Overall Description</h2>
+<h3>2.1 Product Perspective</h3>
+<ul>
+<li>Standalone client-side web page</li>
+<li>No authentication</li>
+<li>No persistent storage (data is in-memory while the page is open)</li>
+<li>No external service integration</li>
+</ul>
+<h3>2.2 Product Functions (High Level)</h3>
+<ul>
+<li>Class selection</li>
+<li>Subject entry (name, type, frequency, faculty, available days)</li>
+<li>Timetable generation</li>
+<li>Timetable visualization</li>
+</ul>
+<h3>2.3 User Classes and Characteristics</h3>
+<ul>
+<li><b>Scheduler/Staff/Student</b>: Basic knowledge of class timetables; uses a modern browser</li>
+</ul>
+<h3>2.4 Operating Environment</h3>
+<ul>
+<li>Modern browsers (Chrome/Edge/Firefox)</li>
+<li>Offline-capable (static files)</li>
+</ul>
+<h3>2.5 Design and Implementation Constraints</h3>
+<ul>
+<li>Days fixed to Monday–Friday</li>
+<li>Slots fixed to 8-9, 9-10, 10-11, 11-12</li>
+<li>Classes fixed to FE-A..FE-E and SE-A..SE-E</li>
+<li>Labs require two consecutive slots</li>
+<li>Faculty conflicts tracked globally during the session</li>
+</ul>
+<h3>2.6 Assumptions and Dependencies</h3>
+<ul>
+<li>User enters valid values (e.g., frequency is a positive integer)</li>
+<li>User selects at least one available day</li>
+<li>Generation is best-effort; not guaranteed to place all requested sessions</li>
+</ul>
+<hr>
+<h2>3. Specific Requirements</h2>
+<h3>3.1 External Interface Requirements</h3>
+<h4>3.1.1 User Interface (UI)</h4>
+<p>The UI shall contain:</p>
+<ol>
+<li>Title: “College Timetable Scheduling System”</li>
+<li>Class dropdown (FE-A..SE-E)</li>
+<li>Buttons: Add Subject, Generate Timetable</li>
+<li>Subject Form: Subject Name, Type (Theory/Lab), Frequency per week, Faculty Name, Faculty Available Days (Mon–Fri), Save</li>
+<li>Output: Timetable title, timetable grid, color coding (Lab/Theory)</li>
+</ol>
+<h3>3.2 Functional Requirements</h3>
+<p><b>FR-1:</b> Select a class/division from dropdown.</p>
+<p><b>FR-2:</b> Save subject under currently selected class.</p>
+<p><b>FR-3:</b> Show subject form on Add Subject.</p>
+<p><b>FR-4:</b> Accept subject details (name/type/frequency/faculty/available days).</p>
+<p><b>FR-5:</b> Store subject in memory on Save.</p>
+<p><b>FR-6:</b> Show confirmation that subject is saved.</p>
+<p><b>FR-7:</b> Generate timetable on button click.</p>
+<p><b>FR-8:</b> If no subjects exist for class, show error alert.</p>
+<p><b>FR-9:</b> Create timetable grid for Monday–Friday and 4 fixed slots.</p>
+<p><b>FR-10:</b> Each cell contains subject (name + faculty) or “-”.</p>
+<p><b>Lab rules</b></p>
+<p><b>FR-11:</b> Lab occupies 2 consecutive slots.</p>
+<p><b>FR-12:</b> Lab placed only on faculty available days.</p>
+<p><b>FR-13:</b> Lab placed only if both slots empty.</p>
+<p><b>FR-14:</b> Lab placed only if faculty free for both slots.</p>
+<p><b>FR-15:</b> Allocate labs before theory.</p>
+<p><b>Theory rules</b></p>
+<p><b>FR-16:</b> Place theory sessions up to weekly frequency (best-effort).</p>
+<p><b>FR-17:</b> Place only on available days.</p>
+<p><b>FR-18:</b> Place only into empty slot.</p>
+<p><b>FR-19:</b> Place only if faculty free.</p>
+<p><b>FR-20:</b> Do not place same subject in adjacent slots on same day.</p>
+<p><b>Faculty conflicts</b></p>
+<p><b>FR-21:</b> Maintain global faculty schedule in session.</p>
+<p><b>FR-22:</b> Prevent faculty being double-booked at same day/slot across generated timetables.</p>
+<p><b>Display</b></p>
+<p><b>FR-23:</b> Show “&lt;ClassName&gt; Timetable” title.</p>
+<p><b>FR-24:</b> Color cells by type (lab/theory).</p>
+<h3>3.3 Non-Functional Requirements</h3>
+<ul>
+<li><b>NFR-1 (Usability):</b> Easy to use with minimal training.</li>
+<li><b>NFR-2 (Clarity):</b> Inputs/labels shall be understandable.</li>
+<li><b>NFR-3 (Performance):</b> Generate timetable within ~1 second for typical input sizes.</li>
+<li><b>NFR-4 (Correctness):</b> No faculty double-booking in same slot.</li>
+<li><b>NFR-5 (Correctness):</b> No two subjects in same cell.</li>
+<li><b>NFR-6 (Maintainability):</b> Allocation logic separated into functions.</li>
+<li><b>NFR-7 (Portability):</b> Works on modern browsers.</li>
+</ul>
+<hr>
+<h2>4. Use Cases</h2>
+<h3>UC-1 Add Subject</h3>
+<ol>
+<li>Select class</li>
+<li>Click Add Subject</li>
+<li>Enter details</li>
+<li>Click Save</li>
+</ol>
+<p><b>Result:</b> Subject stored for class</p>
+<h3>UC-2 Generate Timetable</h3>
+<ol>
+<li>Select class</li>
+<li>Click Generate Timetable</li>
+<li>System allocates labs then theory</li>
+<li>Displays timetable</li>
+</ol>
+<p><b>Result:</b> Timetable shown</p>
+<hr>
+<h2>5. Acceptance Criteria</h2>
+<ul>
+<li><b>AC-1:</b> Error shown if generating without subjects</li>
+<li><b>AC-2:</b> Lab occupies exactly 2 consecutive slots</li>
+<li><b>AC-3:</b> Same theory subject not adjacent on same day</li>
+<li><b>AC-4:</b> Faculty not double-booked</li>
+<li><b>AC-5:</b> Grid is 5 days × 4 slots with correct display</li>
+</ul>
+<hr>
+<p><b>End of Document</b></p>
+</body>
+</html>
