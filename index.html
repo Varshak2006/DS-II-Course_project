@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +6,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script>
+let role = localStorage.getItem("role");
 
+if (!role) {
+    window.location.href = "login.html";
+}
+if (role === "student") {
+    window.location.href = "student.html";
+}
+</script>
+<button onclick="logout()">Logout</button>
 <h1>College Timetable Scheduling System</h1>
 
 <!-- EmailJS SDK (free, no backend needed) -->
