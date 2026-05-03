@@ -70,33 +70,128 @@ td {
 
 .theory {
     background: #fff3cd;
+} */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #eef2f3, #dfe9f3);
+    padding: 20px;
 }
 
+/* Heading */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
 
+/* Controls */
+.controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
+/* Buttons */
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
+button:hover {
+    background: #1a252f;
+}
 
+/* Form Box */
+.formBox {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
 
+/* Inputs */
+input[type="text"],
+input[type="number"],
+select {
+    width: 90%;
+    margin: 8px;
+    padding: 8px;
+}
 
+/* Fix checkbox alignment */
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
 
+/* Days section */
+.days-label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
 
+.days-container {
+    display: flex;
+    flex-direction: column;  /* vertical list */
+    align-items: flex-start; /* LEFT aligned */
+    margin-left: 8px;
+}
 
+/* Each checkbox line */
+.days-container label {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
 
+/* Table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
+th {
+    background: #2c3e50;
+    color: white;
+    padding: 10px;
+}
 
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
 
+/* Colors */
+.lab {
+    background: #d4f4dd;
+}
 
+.theory {
+    background: #fff3cd;
+} */
+#freeSlots button {
+    display: block;
+    margin: 5px 0;
+    background: #16a085;
+}
 
-
-
-
-
-
-
-
-/* body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
+#freeSlots button:hover {
+    background: #138d75;
+}
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #eef2f3, #dfe9f3);
     padding: 20px;
 }
 
@@ -111,31 +206,32 @@ h1 {
 }
 
 button {
-    padding: 8px 15px;
+    padding: 10px 15px;
     margin: 5px;
     background: #2c3e50;
     color: white;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 5px;
 }
 
 button:hover {
-    background: #34495e;
+    background: #1a252f;
 }
 
 .formBox {
     background: white;
-    padding: 15px;
-    margin: 15px auto;
+    padding: 20px;
+    margin: 20px auto;
     width: 50%;
-    border-radius: 8px;
-    box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
 }
 
 input, select {
-    margin: 5px;
-    padding: 5px;
+    width: 90%;
+    margin: 8px;
+    padding: 8px;
 }
 
 table {
@@ -143,23 +239,25 @@ table {
     width: 100%;
     margin-top: 20px;
     background: white;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 th {
     background: #2c3e50;
     color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
 }
 
 .lab {
-    background-color: #d1f2eb;
+    background: #d4f4dd;
 }
 
 .theory {
-    background-color: #f9e79f;
-} */
+    background: #fff3cd;
+}
