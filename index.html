@@ -51,162 +51,32 @@
 
 <h2 id="timetableTitle"></h2>
 <div id="timetableContainer"></div>
+<h2>Schedule Extra Lecture</h2>
 
+<div class="formBox">
+
+    <label>Select Class:</label>
+    <select id="extraClass">
+        <option value="FE-A">FE-A</option>
+        <option value="FE-B">FE-B</option>
+        <option value="FE-C">FE-C</option>
+        <option value="FE-D">FE-D</option>
+        <option value="FE-E">FE-E</option>
+        <option value="SE-A">SE-A</option>
+        <option value="SE-B">SE-B</option>
+        <option value="SE-C">SE-C</option>
+        <option value="SE-D">SE-D</option>
+        <option value="SE-E">SE-E</option>
+    </select>
+
+    <label>Faculty Name:</label>
+    <input type="text" id="extraFaculty" placeholder="Enter Faculty Name">
+
+    <button onclick="showFreeSlots()">Show Free Slots</button>
+
+    <div id="freeSlots" style="margin-top: 15px;"></div>
+
+</div>
 <script src="script.js"></script>
 </body>
 </html>
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>College Timetable Scheduling System</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <h1>College Timetable Scheduling System</h1>
-
-    <div class="controls">
-        <select id="classSelect">
-            <option value="FE-A">FE-A</option>
-            <option value="FE-B">FE-B</option>
-            <option value="FE-C">FE-C</option>
-            <option value="FE-D">FE-D</option>
-            <option value="FE-E">FE-E</option>
-            <option value="SE-A">SE-A</option>
-            <option value="SE-B">SE-B</option>
-            <option value="SE-C">SE-C</option>
-            <option value="SE-D">SE-D</option>
-            <option value="SE-E">SE-E</option>
-        </select>
-
-        <button onclick="addSubject()">Add Subject</button>
-        <button onclick="generateTimetable()">Generate Timetable</button>
-    </div>
-
-    <div id="subjectForm" class="formBox">
-        <input type="text" id="subName" placeholder="Subject Name">
-        
-        <select id="subType">
-            <option value="Theory">Theory</option>
-            <option value="Lab">Lab</option>
-        </select>
-
-        <input type="number" id="frequency" placeholder="Frequency per week">
-
-        <input type="text" id="faculty" placeholder="Faculty Name">
-
-        <label>Faculty Available Days:</label><br>
-        <input type="checkbox" value="Monday">Mon
-        <input type="checkbox" value="Tuesday">Tue
-        <input type="checkbox" value="Wednesday">Wed
-        <input type="checkbox" value="Thursday">Thu
-        <input type="checkbox" value="Friday">Fri
-        <br><br>
-
-        <button onclick="saveSubject()">Save</button>
-    </div>
-
-    <h2 id="timetableTitle"></h2>
-
-    <div id="timetableContainer"></div>
-
-    <script src="script.js"></script>
-</body>
-</html> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>College Timetable Scheduling System</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <h1>College Timetable Scheduling System</h1>
-
-    <div class="controls">
-        <select id="classSelect">
-            <option value="FE-A">FE-A</option>
-            <option value="FE-B">FE-B</option>
-            <option value="FE-C">FE-C</option>
-            <option value="FE-D">FE-D</option>
-            <option value="FE-E">FE-E</option>
-            <option value="SE-A">SE-A</option>
-            <option value="SE-B">SE-B</option>
-            <option value="SE-C">SE-C</option>
-            <option value="SE-D">SE-D</option>
-            <option value="SE-E">SE-E</option>
-        </select>
-
-        <button onclick="addSubject()">Add Subject</button>
-        <button onclick="generateTimetable()">Generate Timetable</button>
-    </div>
-
-    <div id="subjectForm" class="formBox">
-        <input type="text" id="subName" placeholder="Subject Name">
-        
-        <select id="subType">
-            <option value="Theory">Theory</option>
-            <option value="Lab">Lab</option>
-        </select>
-
-        <input type="number" id="frequency" placeholder="Frequency per week">
-
-        <input type="text" id="faculty" placeholder="Faculty Name">
-
-        <label>Faculty Available Days:</label><br>
-        <input type="checkbox" value="Monday">Mon
-        <input type="checkbox" value="Tuesday">Tue
-        <input type="checkbox" value="Wednesday">Wed
-        <input type="checkbox" value="Thursday">Thu
-        <input type="checkbox" value="Friday">Fri
-        <br><br>
-
-        <button onclick="saveSubject()">Save</button>
-    </div>
-
-    <h2 id="timetableTitle"></h2>
-
-    <div id="timetableContainer"></div>
-
-    <script src="script.js"></script>
-</body>
-</html> -->
