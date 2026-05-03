@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Timetable</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+let role = localStorage.getItem("role");
+if (role !== "student") {
+    window.location.href = "login.html";
+}
+</script>
+
+<h1>Student Timetable View</h1>
+
+<div class="formBox">
+    <label>Select Your Class:</label>
+    <select id="studentClass">
+        <option value="FE-A">FE-A</option>
+        <option value="FE-B">FE-B</option>
+        <option value="SE-A">SE-A</option>
+        <option value="SE-B">SE-B</option>
+    </select>
+
+    <button onclick="viewTimetable()">View Timetable</button>
+</div>
+
+<div id="timetableContainer"></div>
+
+<script src="script.js"></script>
+
+<script>
+function viewTimetable() {
+    let className = document.getElementById("studentClass").value;
+
+    if (!allTimetables[className]) {
+        alert("Timetable not generated yet!");
+        return;
+    }
+
+    let timetable = allTimetables[className].table;
+
+    let html = `<h2>${className} Timetable</h2><table><tr><th>Day</th>`;
+    slots.forEach(s => html += `<th>${s}</th>`);
+    html += "</tr>";
+
+    days.forEach(day => {
+        html += `<tr><td>${day}</td>`;
+        slots.forEach(slot => {
+            let c = timetable[day][slot];
+            html += c
+                ? `<td><b>${c.name}</b><br>${c.faculty}</td>`
+                : "<td>-</td>";
+        });
+        html += "</tr>";
+    });
+
+    html += "</table>";
+    document.getElementById("timetableContainer").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
