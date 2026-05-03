@@ -5,12 +5,19 @@ let subjectsData = {};
 let facultySchedule = {};
 let roomSchedule = {};
 let allTimetables = {};
-
+let saved = localStorage.getItem("timetables");
+if (saved) {
+    allTimetables = JSON.parse(saved);
+}
 const rooms = {
     theory: ["C1","C2","C3","C4","C5"],
     lab: ["L1","L2","L3"]
 };
+let urlParams = new URLSearchParams(window.location.search);
 
+if (urlParams.get("student") === "true") {
+    localStorage.setItem("role", "student");
+}
 // ─────────────────────────────────────────────
 // EMAILJS CONFIG — fill these in after setup
 // ─────────────────────────────────────────────
@@ -167,6 +174,7 @@ function generateTimetable() {
 
     allTimetables[className] = { table: bestTimetable, unscheduled: bestUnscheduled };
     displayAllTimetables();
+    localStorage.setItem("timetables", JSON.stringify(allTimetables));
 }
 
 // ------------------ HELPERS ------------------
@@ -461,4 +469,21 @@ async function bookExtraClassToday(className, faculty, slot) {
 
     // Send email notifications to all students of this class
     await sendClassNotification(className, faculty, subject.trim(), slot, dateStr);
+}
+
+function applyRoleAccess() {
+    let role = localStorage.getItem("role");
+
+    if (role === "faculty") {
+        // Hide admin features
+        document.querySelector("button[onclick='addSubject()']").style.display = "none";
+        document.querySelector("button[onclick='generateTimetable()']").style.display = "none";
+    }
+}
+window.onload = function() {
+    applyRoleAccess();
+};
+function logout() {
+    localStorage.removeItem("role");
+    window.location.href = "login.html";
 }
