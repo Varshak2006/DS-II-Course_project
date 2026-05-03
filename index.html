@@ -6,7 +6,17 @@
 </head>
 <body>
 
-<h1> College Timetable Scheduling System</h1>
+<h1>College Timetable Scheduling System</h1>
+
+<!-- EmailJS SDK (free, no backend needed) -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+    // Initialise EmailJS with your Public Key
+    // Replace "YOUR_PUBLIC_KEY" in script.js EMAILJS_CONFIG first
+    document.addEventListener("DOMContentLoaded", () => {
+        emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
+    });
+</script>
 
 <div class="controls">
     <select id="classSelect">
@@ -21,23 +31,19 @@
         <option value="SE-D">SE-D</option>
         <option value="SE-E">SE-E</option>
     </select>
-
     <button onclick="addSubject()">Add Subject</button>
-    <button onclick="generateTimetable()"> Generate</button>
+    <button onclick="generateTimetable()">Generate</button>
 </div>
 
 <div id="subjectForm" class="formBox">
     <input type="text" id="subName" placeholder="Subject Name">
-
     <select id="subType">
         <option value="Theory">Theory</option>
         <option value="Lab">Lab</option>
     </select>
-
     <input type="number" id="frequency" placeholder="Frequency">
     <input type="number" id="priority" placeholder="Priority (1-10)">
     <input type="text" id="faculty" placeholder="Faculty Name">
-
     <label>Available Days:</label><br>
     <input type="checkbox" value="Monday">Mon
     <input type="checkbox" value="Tuesday">Tue
@@ -45,16 +51,15 @@
     <input type="checkbox" value="Thursday">Thu
     <input type="checkbox" value="Friday">Fri
     <br><br>
-
-    <button onclick="saveSubject()"> Save</button>
+    <button onclick="saveSubject()">Save</button>
 </div>
 
 <h2 id="timetableTitle"></h2>
 <div id="timetableContainer"></div>
+
+<!-- ── SCHEDULE EXTRA LECTURE (full week) ── -->
 <h2>Schedule Extra Lecture</h2>
-
 <div class="formBox">
-
     <label>Select Class:</label>
     <select id="extraClass">
         <option value="FE-A">FE-A</option>
@@ -68,15 +73,43 @@
         <option value="SE-D">SE-D</option>
         <option value="SE-E">SE-E</option>
     </select>
-
     <label>Faculty Name:</label>
     <input type="text" id="extraFaculty" placeholder="Enter Faculty Name">
-
     <button onclick="showFreeSlots()">Show Free Slots</button>
-
     <div id="freeSlots" style="margin-top: 15px;"></div>
-
 </div>
+
+<!-- ── FACULTY TODAY'S SCHEDULE ── -->
+<h2>Faculty View - Today's Schedule</h2>
+<div class="formBox">
+    <label>Select Class:</label>
+    <select id="todayClass">
+        <option value="FE-A">FE-A</option>
+        <option value="FE-B">FE-B</option>
+        <option value="FE-C">FE-C</option>
+        <option value="FE-D">FE-D</option>
+        <option value="FE-E">FE-E</option>
+        <option value="SE-A">SE-A</option>
+        <option value="SE-B">SE-B</option>
+        <option value="SE-C">SE-C</option>
+        <option value="SE-D">SE-D</option>
+        <option value="SE-E">SE-E</option>
+    </select>
+    <button onclick="showTodayTimetable(document.getElementById('todayClass').value)">
+        View Today's Schedule
+    </button>
+    <div id="todayTimetableContainer" style="margin-top: 15px;"></div>
+
+    <label style="margin-top: 15px;">Faculty Name:</label>
+    <input type="text" id="todayFaculty" placeholder="Enter Faculty Name">
+    <button onclick="showTodayFreeSlots(
+        document.getElementById('todayClass').value,
+        document.getElementById('todayFaculty').value
+    )">Show Free Slots Today</button>
+    <div id="todayFreeSlots" style="margin-top: 15px;"></div>
+</div>
+
+<!-- Load script AFTER EmailJS SDK -->
 <script src="script.js"></script>
 </body>
 </html>
